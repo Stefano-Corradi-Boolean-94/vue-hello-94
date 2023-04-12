@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- importo la CDN di VueJs  -->
+  <script src="https://unpkg.com/vue@3"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <title>Vue Hello</title>
+</head>
+<body>
+  
+  <!-- in questo DIV "lavorerà" Vue   -->
+  <div id="app">
+    <input @keyup="handleKeyUp" v-model="messaggio" type="text"> <br>
+
+    <!-- quando clicco invio messaggio assume il valore di newMessage  -->
+    <input @keyup.enter="handleInvio" v-model="newMessage" type="text"> <br>
+    
+    <input v-model="coloreTesto" type="text"><br>
+    <input v-model="modificaTesto" type="text"><br>
+
+    <!-- binding della classe con sintassi estesa  -->
+    <h1 v-bind:class="coloreTesto">{{messaggio}}</h1>
+    <!-- binding della classe con sintasis compatta  -->
+    <!-- per passare più classi dinamiche le inserisco in un array  -->
+    <h2 :class="[coloreTesto, modificaTesto]">{{messaggio}}</h2>
+
+    <!-- qui assumo i valori della classe modificatesto e "rosso" se active == true   -->
+    <h2 :class="[modificaTesto, {'rosso' : active}]">{{messaggio}}</h2>
+
+    <!-- classe scritta dinamicamente e staticamente  -->
+    <h3 class="verde" :class="modificaTesto">{{messaggio}}</h3>
+
+    <h4 :class="arrayClass"> Stile con arrayClass {{messaggio}}</h4>
+    <h4 :class="multipleClassi"> Stile con multipleClassi {{messaggio}}</h4>
+    <h5 class="verde">{{messaggio}}</h5>
+
+    <!-- per attivare una classe dinamicamente in base a un valore booleano la devo inserire in un oggetto e come valore dare il data booleano o una determinata condizione  -->
+    <h3 :class="{'rosso' : active}">Classe con active{{messaggio}}</h3>
+    <h3 :class="{'rosso' : counter > 4}">Classe con counter {{messaggio}}</h3>
+
+    <p>{{messaggio}}</p>
+    <p v-text="messaggio"></p>
+    <!-- v-html lo si usa per renderizzare data con tag html  -->
+    <p v-html="messaggio3"></p>
+    
+    <input v-model="nome" type="text">
+    <input v-model="cognome" type="text">
+    <h2>Buongorno {{nome}} {{cognome}}!!</h2>
+    <hr>
+
+    <button @click="funzioneAlClick" >cliccami</button> <br>
+    <button @click="funzioneEstesa" >cliccami funzione estesa</button> <br>
+    <button @click="funzioneArrow" >cliccami arrow fuct</button> <br>
+    <button @click="funzioneCompatta" >cliccami funzione compatta</button> <br>
+    <button @click="funzioneParametri('Ciao')" >cliccami funzione parametri</button> <br>
+    
+    <hr>
+    <h2 :class="{'rosso': counter > 9}">{{counter}}</h2>
+    <button @click="addToCounter" >contatore: {{counter}}</button> <br>
+
+    <hr>
+    <h2 :class="{'rosso': active}">testo toggle rosso</h2>
+    <button @click="toggleRosso">toggle rosso</button>
+
+    <hr>
+    <h2 :class="{'rosso': active}">testo toggle rosso</h2>
+    <button @click="active = !active">toggle rosso senza funzione</button>
+
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
